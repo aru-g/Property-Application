@@ -14,7 +14,7 @@ body-parser: ^1.15.1
 
 #Install
 
-1.  Download and extract the code
+1.  Download and extract the code. Mkae sure to extract the node_modules.zip folder which is included in the code. The extracted node_modules folder should be within the root folder.
 2. Create a MongoDb Database called prop, and a collection in it called property with the following attributes - 
  			pid : contains the property id 
 			reg_date : in the form "dd/mm/yyyy" 
