@@ -1,0 +1,102 @@
+  <!DOCTYPE html>
+  <html>
+    <head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <title>Property Application</title>
+      <!--Import bootstrap.css-->
+      <link type="text/css" rel="stylesheet" href="resources/css/bootstrap.min.css" />
+	  
+	  <!-- custom CSS -->
+ 
+		<style>
+        @font-face {
+            font-family: 'Roboto';
+            src: url('resources/fonts/roboto/Roboto-Regular.eot');
+            src: url('resources/fonts/roboto/Roboto-Regular.woff') format('woff'), 
+            url('resources/fonts/roboto/Roboto-Regular.ttf') format('truetype');
+            font-style: normal;
+            }
+            
+        body{font-family: "Roboto";
+		font-size:16px;
+		background-image: url("resources/bg3.jpg");
+		background-repeat: no-repeat ;
+		background-position : center;
+		}
+            
+		.width-30-pct{
+			width:30%;
+		}
+		 
+		.margin-bottom-1em{
+			margin-bottom:1em;
+		}
+.header img {
+  float: left;
+  width: 100px;
+  height: 100px;
+}
+
+.header h1 {
+  position: relative;
+  top: 10px;
+  left: 10px;
+}
+	</style>
+</head>
+
+    <body>
+
+<div class="container" ng-app="products" ng-controller="productCTRL">
+<br>	<h3>Hello, {{user}} !</h3>
+    <div class="row">
+	  <div class="header">
+		 <img src="resources/logo2.jpg"> 
+          <br><br><h4><center>Properties</center></h4><br>
+	<div class="col-xs-6">Search<input class="form-control ng-pristine ng-valid" ng-model="searchKeyword" type="text"></div><br><br><br>
+			
+			</div>
+
+			<table class="table table-hover">
+				<thead>
+					<tr>
+					<th class="width-30-pct"><center>PID</center></th>
+					<th ><center>Owner(s)</center></th>
+		       			<th class="width-30-pct"><center>Registration Date</center></th>
+						<th class="width-30-pct"><center>Type</center></th>
+						<th class="width-30-pct"><center>Location</center></th>
+						<th class="width-30-pct"><center>Status</center></th>
+						<th class="width-30-pct"><center></center></th>
+					</tr>
+				</thead>
+				<tbody ng-init="getAllreg()">
+				
+					<tr ng-repeat="d in names | filter: searchKeyword ">
+					<td><center>{{ d.pid }}</center></td>
+					<td><center>{{ d.owner }}</center></td>
+						<td><center>{{ d. reg_date}}</center></td>
+						<td><center>{{ d.type}}</center></td>
+						<td><center>{{ d.location}}</center></td>
+						<td><center>{{ d.status }}</center></td>
+						<td><center>		
+				</tbody>
+			</table>
+ 
+</body>
+</div> <!-- end container -->
+
+      <!--Import jQuery before bootstrap.js-->
+      <script type="text/javascript" src="resources/js/jquery-2.2.1.min.js"></script>
+      <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+	  
+	  <!-- include angular js -->
+	  <script src="resources/js/angular.min.js"></script>
+	  
+	  <!-- controller app -->
+	  <script src="resources/js/app.js"></script>
+
+    </body>
+  </html>

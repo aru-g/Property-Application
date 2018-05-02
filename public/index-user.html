@@ -1,0 +1,180 @@
+  <!DOCTYPE html>
+  <html>
+    <head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <title>Property Application</title>
+      <!--Import bootstrap.css-->
+      <link type="text/css" rel="stylesheet" href="resources/css/bootstrap.min.css" />
+	  
+	  <!-- custom CSS -->
+ 
+		<style>
+        @font-face {
+            font-family: 'Roboto';
+            src: url('resources/fonts/roboto/Roboto-Regular.eot');
+            src: url('resources/fonts/roboto/Roboto-Regular.woff') format('woff'), 
+            url('resources/fonts/roboto/Roboto-Regular.ttf') format('truetype');
+            font-style: normal;
+            }
+            
+        body{
+		font-family: "Roboto";
+		font-size:16px;
+		background-image: url("resources/bg3.jpg");
+		background-repeat: no-repeat ;
+		backgorund-size : 100% 100%;
+		}
+            
+		.width-30-pct{
+			width:20%;
+		}
+		 
+		.margin-bottom-1em{
+			margin-bottom:1em;
+		}
+.header img {
+  float: left;
+  width: 100px;
+  height: 100px;
+}
+
+.header h1 {
+  position: relative;
+  top: 10px;
+  left: 10px;
+}
+
+div.relative {
+    position: relative;
+    right: -1100px;
+    }
+	</style>
+</head>
+
+    <body>
+
+<div class="container" ng-app="products" ng-controller="productCTRL">
+
+<br>	<h3>Hello, {{user}}!</h3>
+  
+    <div class="row">
+	<div class="relative">
+		 <img src="resources/logo2.jpg" height="50px" width="50px"> </div>	
+	  <div class="header">
+
+          <br><br><h2>My Properties</h2><br>
+			
+			</div>
+
+			<table class="table table-hover">
+				<thead>
+					<tr>
+					<th class="width-30-pct"><center>PID</center></th>
+		       			<th class="width-30-pct"><center>Registration Date</center></th>
+						<th class="width-30-pct"><center>Type</center></th>
+						<th class="width-30-pct"><center>Location</center></th>
+						<th class="width-30-pct"><center>Status</center></th>
+						<th class="width-30-pct"><center></center></th>
+					</tr>
+				</thead>
+				<tbody ng-init="getAll()">
+				
+					<tr ng-repeat="d in names | filter: searchKeyword ">
+					<td><a href="/properties/display/{{d._id}}"><center>{{ d.pid }}</center></a></td>
+						<td><center>{{ d. reg_date}}</center></td>
+						<td><center>{{ d.type}}</center></td>
+						<td><center>{{ d.location}}</center></td>
+						<td><center>{{ d.status }}</center></td>
+						<td><center>		
+						<a ng-click="readOne(d._id)" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-edit" aria-hidden="true"> EditPropertyStatus</span></a></center></tr>
+				</tbody>
+			</table>
+            <br><br><h2>Properties for Sale</h2><br>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+					<th class="width-30-pct"><center>PID</center></th>
+		       			<th class="width-30-pct"><center>Registration Date</center></th>
+						<th class="width-30-pct"><center>Type</center></th>
+						<th class="width-30-pct"><center>Location</center></th>
+						<th class="width-30-pct"><center>Owner(s)</center></th>
+						
+						</tr>
+				</thead>
+				
+				
+					<tr ng-repeat="d in forsale1 | filter: searchKeyword ">
+					<td><a href="/properties/display/{{d._id}}"><center>{{ d.pid }}</center></a></td>
+						<td><center>{{ d. reg_date}}</center></td>
+						<td><center>{{ d.type}}</center></td>
+						<td><center>{{ d.location}}</center></td>
+						<td><center>{{ d.owner}}</center></td>
+						
+						<td><center>		
+						<tr ng-repeat="d in forsale2 | filter: searchKeyword ">
+					<td><a href="/properties/display/{{d._id}}"><center>{{ d.pid }}</center></a></td>
+						<td><center>{{ d. reg_date}}</center></td>
+						<td><center>{{ d.type}}</center></td>
+						<td><center>{{ d.location}}</center></td>
+						<td><center>{{ d.owner}}</center></td>
+						<td><center>{{ d.status }}</center></td>
+						<td><center>
+				</tbody>
+			</table>
+			
+			
+<!-- Modal-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-init="getDetails()">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modal-product-title">Updating the Status of your Property</h4>
+      </div>
+      <center>If you want to sell your property, please check the first box and the radiobutton to choose the mode of sale. Else, if you do not want to sell your property, check the second box.</center>
+		<form id="form-dinminder">
+				<div class="form-group">
+					<label for="checkboxvalue2" class="control-label">Property is not Intended for Sale			</label>
+					<input ng-model="checkboxvalue2" type="checkbox" value="clicked">
+				</div>
+				<div class="form-group">
+					<label for="checkboxvalue1" class="control-label">Property is Intended for Sale			</label>
+					<input ng-model="checkboxvalue1" type="checkbox" value="clicked">
+				</div>
+				
+				<div class="form-group">
+  <input type="radio" id="r1" ng-model="radiobuttonvalue" value="Public" checked> Public
+  <input type="radio" id="r2" ng-model="radiobuttonvalue" value="Private"> Private
+</div>
+<div class="form-group">
+<label for="privatenames" class="control-label">Usernames to whom property can be sold			</label>
+<textarea ng-model="privatenames" rows=5 cols=20>Usernames</textarea></div>
+				<div><b style='color: blue'>{{statustext}}</b></div> 
+         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="btn-update-product" type="button" class="btn btn-warning" ng-click="updateStatus()">Save changes</button>
+      </div>
+	  </div>
+	  </div>
+	  </div>
+
+</body>
+</div> <!-- end container -->
+
+      <!--Import jQuery before bootstrap.js-->
+      <script type="text/javascript" src="resources/js/jquery-2.2.1.min.js"></script>
+      <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+	  
+	  <!-- include angular js -->
+	  <script src="resources/js/angular.min.js"></script>
+	  
+	  <!-- controller app -->
+	  <script src="resources/js/app.js"></script>
+
+    </body>
+  </html>

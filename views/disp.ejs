@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Property Details</title>
+<style>
+body {
+background-color: lightgrey;
+}
+</style>
+</head>
+<body>
+<br>
+<br>
+<br>
+<h1>Property Details</h1>
+<ul class="records">
+<h3>
+<% for(var i=0; i<records.length; i++) {%>
+<li>Property Id: <span><%=records[i].pid%></span></li>
+<li>Owner(s): <span><%=records[i].owner%></span></li>
+<li>Registration Date: <span><%=records[i].reg_date%></span></li>
+<li>Type of Property: <span><%=records[i].type%></span></li>
+<li>Location: <span><%=records[i].location%></span></li>
+<li>Dimensions: <span><%=records[i].dimensions%></span></li>
+<li>Latitude and Longitude: <span><%=records[i].geo%></span></li>
+<li>Current Status of Property: <span><%=records[i].status%></span></li> 
+  <% } %>
+</h3>
+</ul>
+</body>
